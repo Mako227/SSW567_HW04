@@ -2,18 +2,17 @@
    File Name:    HW04_Alan_Clark.py
    Author:       Alan Clark
    Date:         2 Oct 2021
-   Description:  
+   Description:  SSW-567 week 4 homework to display a list of GitHub repositories and their number of commits
 """
 
-#import requests
 import urllib.request
 import json
 import re
 import ssl
 import requests
 
-def git_github_commits(user_id : str):
-    """ Get repository information from GitHub """
+def get_github_commits(user_id : str):
+    """ Get and display repository information from GitHub for the user ID entered """
     # Create a context for the service request.
     # I copied this from a textbook without understanding it.
     ctx = ssl.create_default_context()
@@ -33,17 +32,8 @@ def git_github_commits(user_id : str):
         if not raw1 == 'None':
             raw2 = raw1.replace("\"name\":\"", "")
             repo_name = raw2.replace("\",", "")
+            # Build a URL for this repository
             url2 : str = 'https://api.github.com/repos/' + user_id + '/' + repo_name + '/commits'
             # Use URL to get a requests.Response object for the commits page
             commits_page = requests.get(url2)
-            commits_count = len(commits_page.headers)
-            print("Repo: " + repo_name + ", Number of commits: " + str(commits_count))
-            #print("Length is " + str(len(commits_page.headers)))
-            #print("Header:  " + str(commits_page.headers))
-            #commits_page = urllib.request.urlopen(url2, context=ctx)
-            #data = commits_page.read().decode()
-            #print(data)
-            #print("Repo: " + repo_name + ", Number of commits: " + str(len(json.dumps(commits_page))))
-            
-
-git_github_commits('Mako227')
+            print("Repo: " + repo_name + ", Number of commits: " + str(len(commits_page.json())))
