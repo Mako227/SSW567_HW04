@@ -21,7 +21,7 @@ def get_github_commits(user_id : str):
 
     # With the user ID, create a URL and use it to request the data
     print('\nRetrieving repository data for GitHub user ' + user_id + '\n')
-    url1 : str = 'https://api.github.com/users/' + user_id + '/repos'
+    url1 = 'https://api.github.com/users/' + user_id + '/repos'
     repo_page = urllib.request.urlopen(url1, context=ctx)
     data = repo_page.read().decode()
 
@@ -33,7 +33,7 @@ def get_github_commits(user_id : str):
             raw2 = raw1.replace("\"name\":\"", "")
             repo_name = raw2.replace("\",", "")
             # Build a URL for this repository
-            url2 : str = 'https://api.github.com/repos/' + user_id + '/' + repo_name + '/commits'
+            url2 = 'https://api.github.com/repos/' + user_id + '/' + repo_name + '/commits'
             # Use URL to get a requests.Response object for the commits page
             commits_page = requests.get(url2)
             print("Repo: " + repo_name + ", Number of commits: " + str(len(commits_page.json())))
