@@ -4,4 +4,5 @@ python:
 
 # command to run tests
 script:
+ - python3 Test_HW04.py
  - python -m unittest Test_HW04
