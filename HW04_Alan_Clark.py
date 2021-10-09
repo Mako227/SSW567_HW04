@@ -1,8 +1,8 @@
 """
    File Name:    HW04_Alan_Clark.py
    Author:       Alan Clark
-   Date:         2 Oct 2021
-   Description:  SSW-567 week 4 homework to display a list of GitHub repositories and their number of commits
+   Date:         9 Oct 2021
+   Description:  SSW-567 week 5a homework to mock out service calls
 """
 
 import urllib.request
@@ -30,6 +30,7 @@ def get_github_commits(user_id : str):
     # Extract just the repository names, and use those to count commits
     for raw1 in result:
         if not raw1 == 'None':
+            # Strip away everything but the repository name
             raw2 = raw1.replace("\"name\":\"", "")
             repo_name = raw2.replace("\",", "")
             # Build a URL for this repository
